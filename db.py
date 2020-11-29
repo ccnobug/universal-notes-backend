@@ -42,4 +42,7 @@ def add_note(title, content):
 
 
 def delete_note(note_id):
-    notes_table.remove({"_id": ObjectId(note_id)})
+    if notes_table.find_one({"_id": ObjectId(note_id)}) is not None:
+        return notes_table.remove({"_id": ObjectId(note_id)})
+    else:
+        return "Not exist"

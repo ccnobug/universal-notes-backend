@@ -39,10 +39,12 @@ def _add_note():
 @app.route('/notes/<note_id>/delete', methods=['POST'])
 def _delete_note(note_id):
     """
-    POST /notes
+    POST /notes/<note_id>/delete
     - No request body
     - Take in note_id
     - Return success or failure in deleting the note
     """
-    db.delete_note(str(note_id))
-    return util.get_response(1, 'success', None), 200
+    if db.delete_note(str(note_id)) != "Not exist":
+        return util.get_response(True, 'success', None), 200
+    else:
+        return util.get_response(False, 'Note not found', None), 404
