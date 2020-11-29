@@ -42,5 +42,9 @@ def add_note(title, content):
 
 
 def delete_note(note_id):
-    return notes_table.delete_one({"_id": ObjectId(note_id)})
+    result = notes_table.delete_one({"_id": ObjectId(note_id)})
+    if result.deleted_count != 0:
+        return True
+    else:
+        return False
 
