@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from helper import constants
+from bson.objectid import ObjectId
 
 client = MongoClient(constants.DB_ENDPOINT)
 
@@ -38,3 +39,7 @@ def add_note(title, content):
     }
 
     return new_note
+
+
+def delete_note(note_id):
+    notes_table.remove({"_id": ObjectId(note_id)})

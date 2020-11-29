@@ -34,3 +34,15 @@ def _add_note():
     body = request.get_json()
     new_note = db.add_note(body['title'], body['content'])
     return new_note, 200
+
+
+@app.route('/notes/<note_id>/delete', methods=['POST'])
+def _delete_note(note_id):
+    """
+    POST /notes
+    - No request body
+    - Take in note_id
+    - Return success or failure in deleting the note
+    """
+    db.delete_note(str(note_id))
+    return util.get_response(1, 'success', None), 200
