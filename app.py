@@ -44,7 +44,7 @@ def _delete_note(note_id):
     - Take in note_id
     - Return success or failure in deleting the note
     """
-    if db.delete_note(str(note_id)) is True:
+    if db.delete_note(note_id) is True:
         return util.get_response(True, 'success', None), 200
     else:
         return util.get_response(False, 'Note not found', None), 404
